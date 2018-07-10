@@ -3,7 +3,7 @@
 
 //Let's cache all necessary files (JS, HTML, CSS, Images, Maps, Data)
 let files = [
-    'data/restaurants.json',
+    //'data/restaurants.json',
     'css/styles.css',
     'favicon.ico',
     'index.html',

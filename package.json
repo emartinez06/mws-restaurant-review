@@ -1,25 +1,26 @@
 {
-  "name": "Rest-Reviewer",
-  "private": true,
-  "version": "1.0",
-  "description": "Mobile application with NodeJS and Sails",
-  "keywords": [],
+  "name": "mws-restaurant-review",
+  "version": "1.0.0",
+  "description": "Restaurant reviewer app with NodeJS and Sails as backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emartinez06/mws-restaurant-review.git"
+  },
+  "author": "E. Martinez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emartinez06/mws-restaurant-review/issues"
+  },
+  "homepage": "https://github.com/emartinez06/mws-restaurant-review#readme",
   "dependencies": {
     "include-all": "^1.0.0",
     "rc": "1.0.1",
     "sails": "^0.12.13",
     "sails-disk": "~0.10.9"
-  },
-  "scripts": {
-    "debug": "node debug app.js",
-    "start": "node app.js"
-  },
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/emartinez06/mws-restaurant-review.git"
-  },
-  "author": "Edwin Martinez",
-  "linkedIn": "https://www.linkedin.com/in/emartinez6/",
-  "email": "mail@devmartinez.net"
+  }
 }

@@ -5,8 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
   <!-- Normalize.css for better cross-browser consistency -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />-->
   <!-- Main CSS file -->
+  <style>
+    body,td,th,p{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+      color: #333;
+      line-height: 1.5;
+    }
+    body {
+      background-color: #fdfdfd;
+      margin: 0;
+      position:relative;
+    }
+    ul, li {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+      color: #333;
+    }
+    a {
+      color: orange;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      color: #3397db;
+      text-decoration: none;
+    }
+    a img{
+      border: none 0 #fff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0 0 20px;
+    }
+    article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+      display: block;
+    }
+    nav {
+      display: grid;
+      grid-template-columns: 1fr;
+      text-align: center;
+      height: 80px;
+      background-color: #252831;
+    }
+    nav h1 {
+      margin: auto;
+      color: #fff;
+      font-size: 14pt;
+      font-weight: 200;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+    }
+  </style>
   <link rel="stylesheet" href="css/styles.css" type="text/css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <title>Restaurant Reviewer - Restaurant Info</title>
@@ -44,22 +95,18 @@
   <section tabindex="8" id="reviews-container" role="feed" aria-label="Reviews from users">
     <ul id="reviews-list" role="list"></ul>
   </section>
-
 </main>
-
-
 <!-- Beginning footer -->
 <footer id="footer">
   Copyright (c) 2018 <span id="text-footer">Restaurant Reviewer</span> All Rights Reserved.
 </footer>
-
 <!-- Beginning scripts -->
 <script src="js/dbhelper.js"></script>
 <script src="js/restaurant_info.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>
 <script>
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js', {scope: '/mws-restaurant/'})
+        navigator.serviceWorker.register('sw.js', {scope: '/mws-restaurant-review/'})
             .then(function(regSW) {
                 // registration worked
                 console.log('Registration succeeded. Scope is ' + regSW.scope);
@@ -73,5 +120,4 @@
     }
 </script>
 </body>
-
 </html>
