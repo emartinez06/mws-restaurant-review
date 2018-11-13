@@ -1,7 +1,7 @@
 /**
  * Common database helper functions.
  */
-class DBHelper {
+export default class DBHelper {
 
     /**
      * Database URL.
@@ -23,7 +23,7 @@ class DBHelper {
             if (xhr.status === 200) { // Got a success response from server!
                 const json = JSON.parse(xhr.responseText);
                 //console.log(json);
-                const restaurants = json;
+                const restaurants = json.restaurants;
                 callback(null, restaurants);
             } else { // Oops!. Got an error from server.
                 const error = (`Request failed. Returned status of ${xhr.status}`);
@@ -152,7 +152,7 @@ class DBHelper {
      * Restaurant image URL.
      */
     static imageUrlForRestaurant(restaurant) {
-        return (`img/${restaurant.photograph}`);
+        return (`img/${restaurant.photograph}.jpg`);
     }
 
     /**

@@ -8,3 +8,6 @@ gen
 # Dependencies
 node_modules/
 bower_coomponents/
+
+# Distribution folder
+dist/

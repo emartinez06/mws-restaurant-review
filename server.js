@@ -25,7 +25,7 @@
 process.chdir(__dirname);
 
 // Attempt to import `sails`.
-let sails;
+var sails;
 try {
   sails = require('sails');
 } catch (e) {
@@ -40,7 +40,7 @@ try {
 
 // --•
 // Try to get `rc` dependency (for loading `.sailsrc` files).
-let rc;
+var rc;
 try {
   rc = require('rc');
 } catch (e0) {

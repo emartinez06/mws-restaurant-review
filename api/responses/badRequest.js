@@ -18,9 +18,9 @@
 module.exports = function badRequest(data, options) {
 
   // Get access to `req`, `res`, & `sails`
-  let req = this.req;
-  let res = this.res;
-  let sails = req._sails;
+  var req = this.req;
+  var res = this.res;
+  var sails = req._sails;
 
   // Set status code
   res.status(400);
@@ -49,7 +49,7 @@ module.exports = function badRequest(data, options) {
   options = (typeof options === 'string') ? { view: options } : options || {};
 
   // Attempt to prettify data for views, if it's a non-error object
-  let viewData = data;
+  var viewData = data;
   if (!(viewData instanceof Error) && 'object' == typeof viewData) {
     try {
       viewData = require('util').inspect(data, {depth: null});

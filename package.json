@@ -1,26 +1,50 @@
 {
-  "name": "mws-restaurant-review",
-  "version": "1.0.0",
-  "description": "Restaurant reviewer app with NodeJS and Sails as backend",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emartinez06/mws-restaurant-review.git"
+    "url": "git://github.com/emartinez06/mws-restaurant-review.git"
   },
-  "author": "E. Martinez",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/emartinez06/mws-restaurant-review/issues"
-  },
-  "homepage": "https://github.com/emartinez06/mws-restaurant-review#readme",
+  "author": "Edwin Martinez",
+  "linkedIn": "https://www.linkedin.com/in/emartinez6/",
+  "email": "edwin@devmartinez.net",
+  "name": "mws-restaurant-review",
+  "private": true,
+  "version": "1.1.0",
+  "description": "Mobile web app to review restaurants",
+  "keywords": [],
   "dependencies": {
     "include-all": "^1.0.0",
+    "leaflet": "^1.3.4",
+    "mapbox-gl": "^0.51.0",
     "rc": "1.0.1",
     "sails": "^0.12.13",
     "sails-disk": "~0.10.9"
-  }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "ansi-colors": "^3.1.0",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.0",
+    "browserify": "^16.2.3",
+    "del": "^3.0.0",
+    "fancy-log": "^1.3.2",
+    "gulp": "^3.9.1",
+    "gulp-newer": "^1.4.0",
+    "gulp-responsive": "^2.11.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "lodash": "^4.17.11",
+    "merge-stream": "^1.0.1",
+    "npm-run-all": "^4.1.3",
+    "run-sequence": "^2.2.1",
+    "sharp": "^0.20.5",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.11.0"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "gulp sync"
+  },
+  "main": "app.js"
 }

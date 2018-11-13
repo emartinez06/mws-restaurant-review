@@ -4,9 +4,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <!-- Normalize.css for better cross-browser consistency -->
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />-->
-  <!-- Main CSS file -->
+  <meta name="description" content="App to review restaurants">
+  <meta name="theme-color" content="#fdfdfd">
+  <link rel="manifest" href="manifest.json">
   <style>
     body,td,th,p{
       font-family: Arial, Helvetica, sans-serif;
@@ -57,53 +57,50 @@
       letter-spacing: 10px;
       text-transform: uppercase;
     }
+    .marker {
+      background-image: url('images/mapbox-icon.png');
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+
   </style>
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <title>Restaurant Reviewer - Restaurant Info</title>
+  <title>Restaurant Reviewer</title>
 </head>
 
-<body class="inside">
-<!-- Beginning header -->
+<body>
 <header>
-  <!-- Beginning nav -->
   <nav>
-    <h1 tabindex="1">Restaurant Reviews</h1>
-    <ul id="breadcrumb" aria-label="Breadcrumb">
-      <li><a tabindex="2" href="index.html">Home</a></li>
-    </ul>
+    <h1 tabindex="1">Restaurant Reviewer</h1>
   </nav>
-  <!-- Beginning breadcrumb -->
-  <!-- End nav -->
 </header>
-<!-- End header -->
 
-<!-- Beginning main -->
 <main id="maincontent">
-  <!-- Beginning restaurant -->
-  <section class="restaurant-container">
-    <div class="restaurant-info">
-      <h3 tabindex="3" id="restaurant-name"></h3>
-      <img id="restaurant-img">
-      <p tabindex="4" id="restaurant-cuisine"></p>
-      <p tabindex="5" id="restaurant-address"></p>
-      <table tabindex="6" id="restaurant-hours"></table>
-      <div role="application" tabindex="7" aria-label="Restaurant Map" id="map"></div>
-    </div>
+  <section aria-label="Restaurants Map" id="map-container" tabindex="-1">
+    <div role="application" id="map" aria-label="Map with pins to restaurants"></div>
   </section>
-  <!-- Beginning reviews -->
-  <section tabindex="8" id="reviews-container" role="feed" aria-label="Reviews from users">
-    <ul id="reviews-list" role="list"></ul>
+  <section>
+    <div class="filter-options">
+      <h2>Filter Results</h2>
+      <select tabindex="2" id="neighborhoods-select" aria-label="Neighborhoods" name="neighborhoods" onchange="updateRestaurants()">
+        <option value="all">All Neighborhoods</option>
+      </select>
+      <select tabindex="3" id="cuisines-select" aria-label="Cuisine Types" name="cuisines" onchange="updateRestaurants()">
+        <option value="all">All Cuisines</option>
+      </select>
+    </div>
+    <ul id="restaurants-list"></ul>
   </section>
 </main>
-<!-- Beginning footer -->
-<footer id="footer">
-  Copyright (c) 2018 <span id="text-footer">Restaurant Reviewer</span> All Rights Reserved.
-</footer>
-<!-- Beginning scripts -->
-<script src="js/dbhelper.js"></script>
-<script src="js/restaurant_info.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>
+<script async src="js/main.js"></script>
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>-->
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js', {scope: '/mws-restaurant-review/'})
@@ -119,5 +116,8 @@
         location.replace("https://browsehappy.com/");
     }
 </script>
+<footer id="footer">
+  Copyright (c) 2018 <a href="#"><strong>Restaurant Reviewer</strong></a> All Rights Reserved.
+</footer>
 </body>
 </html>
