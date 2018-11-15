@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="description" content="App to review restaurants">
+  <meta name="theme-color" content="#fdfdfd">
+  <link rel="manifest" href="manifest.json">
+  <!-- Main CSS file -->
+  <style>
+    body,td,th,p{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+      color: #333;
+      line-height: 1.5;
+    }
+    body {
+      background-color: #fdfdfd;
+      margin: 0;
+      position:relative;
+    }
+    ul, li {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10pt;
+      color: #333;
+    }
+    a {
+      color: orange;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      color: #3397db;
+      text-decoration: none;
+    }
+    a img{
+      border: none 0 #fff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0 0 20px;
+    }
+    article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+      display: block;
+    }
+    nav {
+      display: grid;
+      grid-template-columns: 1fr;
+      text-align: center;
+      height: 80px;
+      background-color: #252831;
+    }
+    nav h1 {
+      margin: auto;
+      color: #fff;
+      font-size: 14pt;
+      font-weight: 200;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+    }
+  </style>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>Restaurant Reviewer - Restaurant Info</title>
+</head>
+
+<body class="inside">
+<!-- Beginning header -->
+<header>
+  <!-- Beginning nav -->
+  <nav>
+    <h1>Restaurant Reviews</h1>
+    <ul id="breadcrumb" aria-label="Breadcrumb">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </nav>
+  <!-- Beginning breadcrumb -->
+  <!-- End nav -->
+</header>
+<!-- End header -->
+
+<!-- Beginning main -->
+<main id="maincontent">
+  <!-- Beginning restaurant -->
+  <section class="restaurant-container">
+    <div class="restaurant-info">
+      <h3 id="restaurant-name"></h3>
+      <img id="restaurant-img" />
+      <p id="restaurant-cuisine"></p>
+      <p id="restaurant-address"></p>
+      <table id="restaurant-hours"></table>
+      <div role="application" tabindex="7" aria-label="Restaurant Map" id="map"></div>
+    </div>
+  </section>
+  <!-- Beginning reviews -->
+  <section id="reviews-container" role="feed" aria-label="Reviews from users">
+    <ul id="reviews-list" role="list"></ul>
+  </section>
+</main>
+<!-- Beginning footer -->
+<footer id="footer">
+  Copyright (c) 2018 <span id="text-footer">Restaurant Reviewer</span> All Rights Reserved.
+</footer>
+<!-- Beginning scripts -->
+<script src="js/dbhelper.js"></script>
+<script src="js/restaurant_info.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js', {scope: '/'})
+            .then(function(regSW) {
+                // registration worked
+                console.log('Registration succeeded. Scope is ' + regSW.scope);
+            }).catch(function(error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+        });
+    }else{
+        alert('Cache not supported on your browser, please upgrade to a current one');
+        location.replace("https://browsehappy.com/");
+    }
+</script>
+</body>
+</html>
