@@ -1,0 +1,5 @@
+apps:
+- script   : ./app.js
+  name     : 'Sails Server'
+- script : ./liveserver.js
+  name   : 'HTTP Server'

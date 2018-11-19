@@ -1,0 +1,28 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/emartinez06/mws-restaurant-review.git"
+  },
+  "author": "Edwin Martinez",
+  "linkedIn": "https://www.linkedin.com/in/emartinez6/",
+  "email": "edwin@devmartinez.net",
+  "name": "mws-restaurant-review",
+  "private": true,
+  "version": "1.1.0",
+  "description": "Mobile web app to review restaurants",
+  "keywords": ["mobile", "responsive", "restaurants", "reviews", "web apps"],
+  "main": "app.js",
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "pm2 start servers.yml"
+  },
+  "dependencies": {
+    "rc": "1.0.1",
+    "sails": "^0.12.13",
+    "sails-disk": "~0.10.9"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "pm2": "^3.2.2"
+  }
+}

@@ -5,6 +5,22 @@ var map;
 var markers = [];
 
 /**
+ * Initialize Google map, called from HTML.
+ */
+window.initMap = () => {
+    let loc = {
+        lat: 40.713633,
+        lng: -73.9905909
+    };
+    self.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: loc,
+        scrollwheel: false
+    });
+    updateRestaurants();
+};
+
+/**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,22 +84,6 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
 };
 
 /**
- * Initialize Google map, called from HTML.
- */
-window.initMap = () => {
-  let loc = {
-    lat: 40.713633,
-    lng: -73.9905909
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  updateRestaurants();
-};
-
-/**
  * Update page and map for current restaurants.
  */
 updateRestaurants = () => {
@@ -141,12 +141,12 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = restaurant.alt;
+  image.alt = restaurant.description;
   li.append(image);
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
-  name.tabIndex =restaurant.id + 2;
+  //name.tabIndex =restaurant.id + 2;
   li.append(name);
 
   const neighborhood = document.createElement('p');
@@ -160,7 +160,7 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  more.tabIndex = restaurant.id + 3;
+  //more.tabIndex = restaurant.id + 3;
   li.append(more);
 
   return li

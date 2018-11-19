@@ -3,28 +3,32 @@
 
 //Let's cache all necessary files (JS, HTML, CSS, Images, Maps, Data)
 let files = [
-    'data/restaurants.json',
-    'css/styles.css',
-    'favicon.ico',
-    'index.html',
+    // API URL
+    //'http://localhost:1337/restaurants',
+    // Files and root
+    '/',
     'restaurant.html',
-    'sw.js',
-    //JS folder
-    '/js/',
-    //Images folder
-    '/img/'
-    // 'img/Busy_Restaurant.jpg',
-    // 'img/Empty_Restaurant.jpg',
-    // 'img/Outdoor_sign.jpg',
-    // 'img/Outside_Burger_Restaurant.jpg',
-    // 'img/Outside_Restaurant.jpg',
-    // 'img/People_Eating.jpg',
-    // 'img/People_sitting_Restaurant.jpg',
-    // 'img/Pizza.jpg',
-    // 'img/Round_table_restaurant.jpg',
-    // 'img/Table_with_Grill.jpg',
+    'css/styles.css',
+    'manifest.json',
+    'img/1-medium.jpg',
+    'img/2-medium.jpg',
+    'img/3-medium.jpg',
+    'img/4-medium.jpg',
+    'img/5-medium.jpg',
+    'img/6-medium.jpg',
+    'img/7-medium.jpg',
+    'img/8-medium.jpg',
+    'img/9-medium.jpg',
+    'img/10-medium.jpg',
+    'js/idb.js',
+    'js/dbhelper.js',
+    'js/main.js',
+    'js/restaurant_info.js',
+    'sw.js'
 ];
-let cacheName = 'rest-app';
+let cacheName = 'rest-app-3';
+
+//Install the service worker and open the cache
 self.addEventListener('install', function(event) {
     console.log('[ServiceWorker] Installing');
     self.skipWaiting();
@@ -43,7 +47,7 @@ self.addEventListener('activate', function(e) {
     e.waitUntil(
         caches.keys().then(function(keyList) {
             return Promise.all(keyList.map(function(key) {
-                if (key != cacheName) {
+                if (key !== cacheName) {
                     console.log('[ServiceWorker] Removing old cache', key);
                     return caches.delete(key);
                 }
@@ -53,7 +57,7 @@ self.addEventListener('activate', function(e) {
     return self.clients.claim();
 });
 
-//ToDo: Work in a solution to cache Google Maps
+//Fetch files and save them on storage
 self.addEventListener('fetch', function(event) {
     console.log('[ServiceWorker] Fetching files');
     event.respondWith(
@@ -74,4 +78,5 @@ self.addEventListener('fetch', function(event) {
             })
     );
 });
+
 

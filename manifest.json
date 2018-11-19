@@ -1,0 +1,27 @@
+{
+  "name": "Restaurant Reviewer",
+  "short_name": "Rest Review",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#fdfdfd",
+  "background_color": "#fdfdfd",
+  "icons": [
+    {
+      "src": "/img/bell-icon-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/img/bell-icon-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/img/bell-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
