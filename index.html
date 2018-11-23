@@ -7,6 +7,21 @@
   <meta name="description" content="App to review restaurants">
   <meta name="theme-color" content="#fdfdfd">
   <link rel="manifest" href="manifest.json">
+  <script>
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('sw.js', {scope: '/'})
+              .then(function(regSW) {
+                  // registration worked
+                  console.log('Registration succeeded. Scope is ' + regSW.scope);
+              }).catch(function(error) {
+              // registration failed
+              console.log('Registration failed with ' + error);
+          });
+      }else{
+          alert('Cache not supported on your browser, please upgrade to a current one');
+          location.replace("https://browsehappy.com/");
+      }
+  </script>
   <style>
     body,td,th,p{
       font-family: Arial, Helvetica, sans-serif;
@@ -93,21 +108,6 @@
 <script src="js/dbhelper.js"></script>
 <script src="js/main.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js', {scope: '/'})
-            .then(function(regSW) {
-                // registration worked
-                console.log('Registration succeeded. Scope is ' + regSW.scope);
-            }).catch(function(error) {
-            // registration failed
-            console.log('Registration failed with ' + error);
-        });
-    }else{
-        alert('Cache not supported on your browser, please upgrade to a current one');
-        location.replace("https://browsehappy.com/");
-    }
-</script>
 <footer id="footer">
   Copyright (c) 2018 <a href="#"><strong>Restaurant Reviewer</strong></a> All Rights Reserved.
 </footer>

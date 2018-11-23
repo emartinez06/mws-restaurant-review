@@ -14,7 +14,8 @@
   "main": "app.js",
   "scripts": {
     "debug": "node debug app.js",
-    "start": "pm2 start servers.yml"
+    "start": "pm2 start servers.yml",
+    "optimize": "node optimize.js"
   },
   "dependencies": {
     "rc": "1.0.1",
