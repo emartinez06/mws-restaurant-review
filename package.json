@@ -10,7 +10,13 @@
   "private": true,
   "version": "1.1.0",
   "description": "Mobile web app to review restaurants",
-  "keywords": ["mobile", "responsive", "restaurants", "reviews", "web apps"],
+  "keywords": [
+    "mobile",
+    "responsive",
+    "restaurants",
+    "reviews",
+    "web apps"
+  ],
   "main": "app.js",
   "scripts": {
     "debug": "node debug app.js",
@@ -24,6 +30,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
+    "gulp": "^3.9.1",
     "pm2": "^3.2.2"
   }
 }
