@@ -1,8 +1,6 @@
-let restaurants,
-  neighborhoods,
-  cuisines;
-var map;
+let restaurants, cuisine, neighborhoods, map;
 var markers = [];
+let zoom = 10;
 
 /**
  * Initialize Google map, called from HTML.
@@ -140,6 +138,7 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
+  image.srcset = DBHelper.imageSetForRestaurant(restaurant);
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = restaurant.description;
   li.append(image);

@@ -10,4 +10,4 @@ node_modules/
 bower_coomponents/
 
 # Distribution folder
-dist/
+app/

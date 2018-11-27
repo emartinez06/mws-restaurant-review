@@ -54,7 +54,7 @@ class DBHelper {
      * Fetch all restaurants data from API
      */
     static fetchRestaurants(callback) {
-         let dbVersion = 1;
+        let dbVersion = 1;
         fetch(DBHelper.API).then(
             function (response) {
                 if (!response.ok){
@@ -93,14 +93,14 @@ class DBHelper {
                                     let tx = db.transaction('restaurantsInfo');
                                     let cache = tx.objectStore('restaurantsInfo');
                                     return cache.getAll();
-                                })
+                                });
                             });
-                        callback(null, data)
+                        callback(null, data);
                     }
                     else{
                         console.log('IndexedDb not supported.');
                     }
-                })
+                });
     }
 
     /**
@@ -223,17 +223,17 @@ class DBHelper {
     static imageUrlForRestaurant(restaurant) {
 
         //return image restaurant by restaurant id or photo number with a medium default scale
-        return (`/img/${(restaurant.photograph||restaurant.id)}-medium.jpg`);
+        return (`./img/${(restaurant.photograph||restaurant.id)}.jpg`);
     }
 
     /**
      * Restaurant images srcset.
      */
     static imageSetForRestaurant(restaurant) {
-        const image = `/img/${(restaurant.photograph||restaurant.id)}`;
-        return `${image}-small.jpg 300w,
-            ${image}-medium.jpg 600w,
-            ${image}-large.jpg 800w`;
+        const img = `./img/${(restaurant.photograph||restaurant.id)}`;
+        return `${img}-small.jpg 1x,
+            ${img}-medium.jpg 1x,
+            ${img}-large.jpg 2x`;
     }
 
     /**
