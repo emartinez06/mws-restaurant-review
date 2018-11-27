@@ -53,8 +53,6 @@ let files = [
     'img/bell-icon-32.png',
     'img/bell-icon-256.png',
     'img/bell-icon-512.png',
-    'js/idb.js',
-    'js/dbhelper.js',
     'js/main.js',
     'js/restaurant_info.js',
     'sw.js'

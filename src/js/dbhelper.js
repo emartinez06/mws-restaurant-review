@@ -4,8 +4,8 @@
 class DBHelper {
 
     /**
-    * IndexedDB function check
-    **/
+     * IndexedDB function check
+     **/
     static indDB() {
         return "indexedDB" in window && !/iPad|iPhone|iPod/.test(navigator.platform);
     }
@@ -13,7 +13,7 @@ class DBHelper {
     /**
      * 404 Error handling
      */
-    static ErrorPage(){
+    static ErrorPage() {
         let port = window.location.port;
         let url = 'http://localhost:';
         let page = '/error.html';
@@ -24,7 +24,7 @@ class DBHelper {
     /**
      * Database URL.
      */
-    static get API(){
+    static get API() {
 
         //Change here whatever port you want to use. This is the default for the Sails server endpoins
         const port = 1337;
@@ -38,50 +38,63 @@ class DBHelper {
         let dbVersion = 1;
         fetch(DBHelper.API).then(
             function (response) {
-                if (!response.ok){
+                if (!response.ok) {
                     return Promise.reject("Restaurants data couldn't be fetched from remote server");
-                }else{
+                } else {
                     return response.json();
                 }
             })
-            .then(
-                function addRestaurantsData(data) {
-                    if(DBHelper.indDB){
+            .then(function (data) {
+                    if (DBHelper.indDB) {
                         console.log('IDB supported');
-                        const dbPromise = idb.open(
-                            'restaurantsData', dbVersion, function (createDb) {
-                                createDb.createObjectStore('restaurantsInfo', {
-                                    keyPath: 'id',
-                                    autoIncrement: true
-                                });
-                            });
-                        dbPromise.then(
+                        let request = self.indexedDB.open('Restaurant Reviewer', dbVersion);
 
-                            //insert data object in the database
-                            function (db) {
-                                let tx = db.transaction('restaurantsInfo', 'readwrite');
-                                let store = tx.objectStore('restaurantsInfo');
-                                data.forEach(rests => {
-                                    store.put(rests);
-                                });
-                            }).catch(
+                        request.onsuccess = function(event) {
+                            //Restaurants data
+                            let restaurants = data;
 
-                            //Use offline data in case of network error
-                            function (error) {
-                                console.log('Error: ' + error);
-                                alert('Working in offline mode');
-                                dbPromise.then(function (db) {//get the data from out of the store
-                                    let tx = db.transaction('restaurantsInfo');
-                                    let cache = tx.objectStore('restaurantsInfo');
-                                    return cache.getAll();
-                                });
+                            // get database from event
+                            let db = event.target.result;
+
+                            // create transaction from database
+                            let transaction = db.transaction('restaurants', 'readwrite');
+                            transaction.onsuccess = function(event) {
+                                console.log('Data table created successfully.');
+                            };
+
+                            //save data from transaction
+                            let restaurantsStore = transaction.objectStore('restaurants');
+                            restaurants.forEach(function(restaurant){
+                                let db_req = restaurantsStore.add(restaurant);
+                                db_req.onsuccess = function(event) {
+                                    console.log('Restaurant data added successfully'); // true
+                                }
                             });
+
+                            // get restaurants
+                            restaurantsStore.getAll().onsuccess = function(event) {
+                                console.log('[Transaction - GET] restaurants', event.target.result);
+                            };
+                        };
+
+                        request.onerror = function(event) {
+                            console.log('[onerror]', request.error);
+                        };
+
+                        request.onupgradeneeded = function(event) {
+                            let db = event.target.result;
+                            let restaurantsStore = db.createObjectStore('restaurants', {keyPath: 'id', autoIncrement: true});
+                        };
+
                         callback(null, data);
                     }
-                    else{
+                    else {
                         console.log('IndexedDb not supported.');
                     }
-                });
+                }).catch(
+            function (error) {
+                console.log('Error: ' + error);
+            });
     }
 
     /**
@@ -204,14 +217,14 @@ class DBHelper {
     static imageUrlForRestaurant(restaurant) {
 
         //return image restaurant by restaurant id or photo number with a medium default scale
-        return (`./img/${(restaurant.photograph||restaurant.id)}.jpg`);
+        return (`./img/${(restaurant.photograph || restaurant.id)}.jpg`);
     }
 
     /**
      * Restaurant images srcset.
      */
     static imageSetForRestaurant(restaurant) {
-        const img = `./img/${(restaurant.photograph||restaurant.id)}`;
+        const img = `./img/${(restaurant.photograph || restaurant.id)}`;
         return `${img}-small.jpg 1x,
             ${img}-medium.jpg 1x,
             ${img}-large.jpg 2x`;
