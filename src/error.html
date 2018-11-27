@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -55,30 +54,24 @@
         .image{
             margin-top: -25px;
         }
-
     </style>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Error - Restaurant Reviewer</title>
 </head>
-
 <body>
 <header>
     <nav>
         <h1>Restaurant Reviewer</h1>
     </nav>
 </header>
-
 <main id="maincontent">
     <section class="error">
-        <img src="img/bell-icon-256.png" class="image" />
+        <img src="img/bell-icon-256.png" alt="Dining bell" class="image" />
         <h1>Restaurant does not exist.</h1>
         <h3>Go to previous <button onclick="goBack()">page</button></h3>
     </section>
 </main>
-
-<script src="js/idb.js"></script>
-<script src="js/dbhelper.js"></script>
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js', {scope: '/'})

@@ -32,25 +32,6 @@ class DBHelper {
     }
 
     /**
-     * Fetch all restaurants.
-     */
-    // static fetchRestaurants(callback) {
-    //     let xhr = new XMLHttpRequest();
-    //     xhr.open('GET', `${DBHelper.API}/restaurants`);
-    //     xhr.onload = () => {
-    //         if (xhr.status === 200) { // Got a success response from server!
-    //             const restaurants = JSON.parse(xhr.responseText);
-    //             //console.log(restaurants);
-    //             callback(null, restaurants);
-    //         } else { // Oops!. Got an error from server.
-    //             const error = (`Request failed. Returned status of ${xhr.status}`);
-    //             callback(error, null);
-    //         }
-    //     };
-    //     xhr.send();
-    // }
-
-    /**
      * Fetch all restaurants data from API
      */
     static fetchRestaurants(callback) {

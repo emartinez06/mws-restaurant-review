@@ -1,13 +1,15 @@
 'use strict';
 
+let gulp = require('gulp');
 let autoprefixer = require('gulp-autoprefixer');
 let csso = require('gulp-csso');
-let del = require('del');
-let gulp = require('gulp');
+let concat = require('gulp-concat');
 let htmlmin = require('gulp-htmlmin');
-let runSequence = require('run-sequence');
 let uglify = require('gulp-uglify-es').default;
 let responsive = require('gulp-responsive');
+let rename = require('gulp-rename');
+let del = require('del');
+let runSequence = require('run-sequence');
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
@@ -22,9 +24,13 @@ const AUTOPREFIXER_BROWSERS = [
     'bb >= 10'
 ];
 
+//Bundles
+let bundles = ['js/main.js', 'js/restaurant_info.js'];
+
 //File paths
 let cssFiles = './src/css/styles.css';
-let jsFiles = './src/js/**/*.js';
+let jsFilesMain = ['./src/js/idb.js', './src/js/dbhelper.js', './src/js/main.js'];
+let jsFilesRest = ['./src/js/idb.js', './src/js/dbhelper.js', './src/js/restaurant_info.js'];
 let htmlFiles = './src/**/*.html';
 let imgFiles = './src/img/**/*.*';
 let otherFiles = [
@@ -61,12 +67,20 @@ gulp.task('styles', function () {
 });
 
 // Gulp task to minify JavaScript files
-gulp.task('scripts', function() {
-    return gulp.src(jsFiles)
-    // Minify the file
+gulp.task('bundle-main', function() {
+    return gulp.src(jsFilesMain)
         .pipe(uglify())
-        // Output
-        .pipe(gulp.dest('./app/js'))
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest('./app/js'));
+});
+
+
+// Gulp task to minify JavaScript files
+gulp.task('bundle-rest', function() {
+    return gulp.src(jsFilesRest)
+        .pipe(uglify())
+        .pipe(concat('restaurant_info.js'))
+        .pipe(gulp.dest('./app/js'));
 });
 
 // Gulp task to minify HTML files
@@ -114,7 +128,8 @@ gulp.task('clean', () => del(['app']));
 gulp.task('default', ['clean'], function () {
     runSequence(
         'styles',
-        'scripts',
+        'bundle-main',
+        'bundle-rest',
         //'pages',
         'responsive:images',
         'other-files',
