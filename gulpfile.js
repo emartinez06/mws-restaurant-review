@@ -5,9 +5,9 @@ let autoprefixer = require('gulp-autoprefixer');
 let csso = require('gulp-csso');
 let concat = require('gulp-concat');
 let htmlmin = require('gulp-htmlmin');
+let minifyInline = require('gulp-minify-inline');
 let uglify = require('gulp-uglify-es').default;
 let responsive = require('gulp-responsive');
-let rename = require('gulp-rename');
 let del = require('del');
 let runSequence = require('run-sequence');
 
@@ -24,24 +24,22 @@ const AUTOPREFIXER_BROWSERS = [
     'bb >= 10'
 ];
 
-//Bundles
-let bundles = ['js/main.js', 'js/restaurant_info.js'];
-
 //File paths
 let cssFiles = './src/css/styles.css';
-let jsFilesMain = ['./src/js/idb.js', './src/js/dbhelper.js', './src/js/main.js'];
-let jsFilesRest = ['./src/js/idb.js', './src/js/dbhelper.js', './src/js/restaurant_info.js'];
+let jsFilesMain = ['./src/js/dbhelper.js', './src/js/main.js'];
+let jsFilesRest = ['./src/js/dbhelper.js', './src/js/restaurant_info.js'];
 let htmlFiles = './src/**/*.html';
 let imgFiles = './src/img/**/*.*';
 let otherFiles = [
     './src/favicon.ico',
     './src/manifest.json',
     './src/sw.js',
-    './src/index.html',
-    './src/error.html',
-    './src/restaurant.html',
+    //'./src/index.html',
+    //'./src/error.html',
+    //'./src/restaurant.html',
 ];
 let images = './src/img/**/*.jpg';
+let fonts = './src/fonts/**/*.*';
 
 //Gulp task to move other files
 gulp.task('other-files', function() {
@@ -53,6 +51,12 @@ gulp.task('other-files', function() {
 gulp.task('other-images', function() {
     return gulp.src(images)
         .pipe(gulp.dest('./app/img'));
+});
+
+//Gulp task to move fonts
+gulp.task('fonts', function() {
+    return gulp.src(fonts)
+        .pipe(gulp.dest('./app/fonts'));
 });
 
 // Gulp task to minify CSS files
@@ -90,6 +94,7 @@ gulp.task('pages', function() {
             collapseWhitespace: true,
             removeComments: true
         }))
+        .pipe(minifyInline())
         .pipe(gulp.dest('./app'));
 });
 
@@ -130,9 +135,10 @@ gulp.task('default', ['clean'], function () {
         'styles',
         'bundle-main',
         'bundle-rest',
-        //'pages',
+        'pages',
         'responsive:images',
         'other-files',
-        'other-images'
+        'other-images',
+        'fonts'
     );
 });

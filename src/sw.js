@@ -7,8 +7,10 @@ let files = [
     //'http://localhost:1337/restaurants',
     // Files and root
     '/',
+    'index.html',
     'restaurant.html',
     'css/styles.css',
+    'fonts/Roboto-Regular.ttf',
     'manifest.json',
     'img/1.jpg',
     'img/2.jpg',
@@ -102,10 +104,10 @@ self.addEventListener('fetch', function(event) {
                             cache.put(event.request.url, res.clone());
                             //return the cached data
                             return res;
-                        })
-                }).catch(function(err) {
-                    console.log('Error on fetch: ' + err);
-                });
+                        }).catch(function(err){
+                            console.log('Error on fetch: ' + err);
+                        });
+                })
             })
     );
 });
