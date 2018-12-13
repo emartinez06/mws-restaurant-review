@@ -31,11 +31,61 @@ class DBHelper {
         return `http://localhost:${port}/restaurants`;
     }
 
+    static indexedDB(data) {
+        const dbVersion = 1;
+        if (DBHelper.indDB) {
+            console.log('IDB supported');
+            let request = self.indexedDB.open('Restaurant Reviewer', dbVersion);
+            request.onsuccess = function (event) {
+                //Restaurants data
+                let restaurants = data;
+
+                // get database from event
+                let db = event.target.result;
+
+                // create transaction from database
+                let transaction = db.transaction('restaurants', 'readwrite');
+                transaction.onsuccess = function (event) {
+                    console.log('Data table created successfully.');
+                };
+
+                //save data from transaction
+                let restaurantsStore = transaction.objectStore('restaurants');
+                restaurants.forEach(function (restaurant) {
+                    let db_req = restaurantsStore.add(restaurant);
+                    db_req.onsuccess = function (event) {
+                        console.log('Restaurant data added successfully'); // true
+                    }
+                });
+
+                // get restaurants
+                let restData = restaurantsStore.getAll().onsuccess = function (event) {
+                    return event.target.result;
+                };
+            };
+
+            request.onerror = function (event) {
+                console.log('[onerror]', request.error);
+            };
+
+            request.onupgradeneeded = function (event) {
+                let db = event.target.result;
+                let restaurantsStore = db.createObjectStore('restaurants', {
+                    keyPath: 'id',
+                    autoIncrement: true
+                });
+            };
+
+        }
+        else {
+            console.log('IndexedDb not supported.');
+        }
+    }
+
     /**
      * Fetch all restaurants data from API
      */
     static fetchRestaurants(callback) {
-        let dbVersion = 1;
         fetch(DBHelper.API).then(
             function (response) {
                 if (!response.ok) {
@@ -45,53 +95,9 @@ class DBHelper {
                 }
             })
             .then(function (data) {
-                    if (DBHelper.indDB) {
-                        console.log('IDB supported');
-                        let request = self.indexedDB.open('Restaurant Reviewer', dbVersion);
-
-                        request.onsuccess = function(event) {
-                            //Restaurants data
-                            let restaurants = data;
-
-                            // get database from event
-                            let db = event.target.result;
-
-                            // create transaction from database
-                            let transaction = db.transaction('restaurants', 'readwrite');
-                            transaction.onsuccess = function(event) {
-                                console.log('Data table created successfully.');
-                            };
-
-                            //save data from transaction
-                            let restaurantsStore = transaction.objectStore('restaurants');
-                            restaurants.forEach(function(restaurant){
-                                let db_req = restaurantsStore.add(restaurant);
-                                db_req.onsuccess = function(event) {
-                                    console.log('Restaurant data added successfully'); // true
-                                }
-                            });
-
-                            // get restaurants
-                            restaurantsStore.getAll().onsuccess = function(event) {
-                                console.log('[Transaction - GET] restaurants', event.target.result);
-                            };
-                        };
-
-                        request.onerror = function(event) {
-                            console.log('[onerror]', request.error);
-                        };
-
-                        request.onupgradeneeded = function(event) {
-                            let db = event.target.result;
-                            let restaurantsStore = db.createObjectStore('restaurants', {keyPath: 'id', autoIncrement: true});
-                        };
-
-                        callback(null, data);
-                    }
-                    else {
-                        console.log('IndexedDb not supported.');
-                    }
-                }).catch(
+                DBHelper.indexedDB(data);
+                callback(null,data);
+            }).catch(
             function (error) {
                 console.log('Error: ' + error);
             });
@@ -112,38 +118,6 @@ class DBHelper {
             // if restaurant couldn't be fetched from remote server or indexedDB:
             connectionError = DBHelper.ErrorPage();
             return callback(connectionError, null);
-        });
-    }
-
-    /**
-     * Fetch restaurants by a cuisine type with proper error handling.
-     */
-    static fetchRestaurantByCuisine(cuisine, callback) {
-        // Fetch all restaurants  with proper error handling
-        DBHelper.fetchRestaurants((error, restaurants) => {
-            if (error) {
-                callback(error, null);
-            } else {
-                // Filter restaurants to have only given cuisine type
-                const results = restaurants.filter(r => r.cuisine_type === cuisine);
-                callback(null, results);
-            }
-        });
-    }
-
-    /**
-     * Fetch restaurants by a neighborhood with proper error handling.
-     */
-    static fetchRestaurantByNeighborhood(neighborhood, callback) {
-        // Fetch all restaurants
-        DBHelper.fetchRestaurants((error, restaurants) => {
-            if (error) {
-                callback(error, null);
-            } else {
-                // Filter restaurants to have only given neighborhood
-                const results = restaurants.filter(r => r.neighborhood === neighborhood);
-                callback(null, results);
-            }
         });
     }
 
@@ -238,8 +212,8 @@ class DBHelper {
             position: restaurant.latlng,
             title: restaurant.name,
             url: DBHelper.urlForRestaurant(restaurant),
-            map: map,
-            animation: google.maps.Animation.DROP
+            map: map
+            //animation: google.maps.Animation.DROP
         });
         return marker;
     }
