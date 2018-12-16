@@ -11,3 +11,6 @@ bower_coomponents/
 
 # Distribution folder
 app/
+
+# keys
+src/js/keys.js
