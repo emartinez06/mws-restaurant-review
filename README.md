@@ -49,8 +49,9 @@ Improvements on accessibility.
 
 1. You need to have NodeJS installed on your computer. Get it from here: https://nodejs.org.
 2. Run this command on your command prompt or bash shell: ```npm install```. This will install all dependencies needed to run the project.
-3. After all dependencies are installed, run this command: ```npm start```.
-4. Done. Your default browser will be showing up the app, ready to use.
+3. After all dependencies are installed, run this command to optimize files before launching app: ```node run optimize```.
+4. Once all files are optimized, you are ready to launch the app by entering this command: ```npm start```.
+5. Done. Your default browser will be showing up the app, ready to use.
 
 ### Note about ES6
 

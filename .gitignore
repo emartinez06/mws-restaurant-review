@@ -10,4 +10,7 @@ node_modules/
 bower_coomponents/
 
 # Distribution folder
-dist/
+app/
+
+# keys
+src/js/keys.js

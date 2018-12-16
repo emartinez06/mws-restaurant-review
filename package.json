@@ -21,7 +21,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "pm2 start servers.yml",
-    "optimize": "node optimize.js"
+    "optimize": "gulp"
   },
   "dependencies": {
     "rc": "1.0.1",
@@ -30,7 +30,21 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
+    "connect": "^3.6.6",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "pm2": "^3.2.2"
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-minify-inline": "^1.0.0",
+    "gulp-responsive": "^2.11.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.1",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-util": "^3.0.8",
+    "pm2": "^3.2.2",
+    "run-sequence": "^2.2.1",
+    "serve-static": "^1.13.2"
   }
 }

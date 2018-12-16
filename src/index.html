@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
@@ -22,12 +21,11 @@
           location.replace("https://browsehappy.com/");
       }
   </script>
-  <!-- Main CSS file -->
   <style>
     body,td,th,p{
       font-family: Arial, Helvetica, sans-serif;
       font-size: 10pt;
-      color: #333;
+      color: #ffffff;
       line-height: 1.5;
     }
     body {
@@ -73,53 +71,41 @@
       letter-spacing: 10px;
       text-transform: uppercase;
     }
+
   </style>
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <title>Restaurant Reviewer - Restaurant Info</title>
+  <title>Restaurant Reviewer</title>
 </head>
 
-<body class="inside">
-<!-- Beginning header -->
+<body>
 <header>
-  <!-- Beginning nav -->
   <nav>
-    <h1>Restaurant Reviews</h1>
-    <ul id="breadcrumb" aria-label="Breadcrumb">
-      <li><a href="index.html">Home</a></li>
-    </ul>
+    <h1>Restaurant Reviewer</h1>
   </nav>
-  <!-- Beginning breadcrumb -->
-  <!-- End nav -->
 </header>
-<!-- End header -->
 
-<!-- Beginning main -->
 <main id="maincontent">
-  <!-- Beginning restaurant -->
-  <section class="restaurant-container">
-    <div class="restaurant-info">
-      <h3 id="restaurant-name"></h3>
-      <img id="restaurant-img" />
-      <p id="restaurant-cuisine"></p>
-      <p id="restaurant-address"></p>
-      <table id="restaurant-hours"></table>
-      <div role="application" tabindex="7" aria-label="Restaurant Map" id="map"></div>
-    </div>
+  <section aria-label="Restaurants Map" id="map-container">
+    <div role="application" id="map" aria-label="Map with pins to restaurants"></div>
   </section>
-  <!-- Beginning reviews -->
-  <section id="reviews-container" role="feed" aria-label="Reviews from users">
-    <ul id="reviews-list" role="list"></ul>
+  <section>
+    <div class="filter-options">
+      <h2>Filter Results</h2>
+      <select id="neighborhoods-select" aria-label="Neighborhoods" name="neighborhoods" onchange="updateRestaurants()">
+        <option value="all">All Neighborhoods</option>
+      </select>
+      <select id="cuisines-select" aria-label="Cuisine Types" name="cuisines" onchange="updateRestaurants()">
+        <option value="all">All Cuisines</option>
+      </select>
+    </div>
+    <ul id="restaurants-list"></ul>
   </section>
 </main>
-<!-- Beginning footer -->
+<script src="js/main.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<YOUR_GOOGLE_MAPS_KEY>&libraries=places&callback=initMap"></script>
 <footer id="footer">
-  Copyright (c) 2018 <span id="text-footer">Restaurant Reviewer</span> All Rights Reserved.
+  Copyright (c) 2018 <a href="#"><strong>Restaurant Reviewer</strong></a> All Rights Reserved.
 </footer>
-<!-- Beginning scripts -->
-<script async defer src="js/idb.js"></script>
-<script async defer src="js/dbhelper.js"></script>
-<script async defer src="js/restaurant_info.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHKCWMpKZbRHC_ycVmRf4ilutMpjMUzQ8&libraries=places&callback=initMap"></script>
 </body>
 </html>
