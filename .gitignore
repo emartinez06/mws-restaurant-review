@@ -7,10 +7,12 @@ gen
 
 # Dependencies
 node_modules/
-bower_coomponents/
+bower_components/
+package-lock.json
 
 # Distribution folder
 app/
 
 # keys
 src/js/keys.js
+
