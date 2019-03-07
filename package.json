@@ -21,7 +21,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "restart": "pm2 restart servers.yml",
-    "start": "pm2 start servers.yml",
+    "start": "npm run gulp && pm2 start servers.yml",
     "stop": "pm2 stop servers.yml",
     "optimize": "gulp"
   },

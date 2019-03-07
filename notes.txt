@@ -1,0 +1,4 @@
+original commands on package.json file
+
+"start": "pm2 start servers.yml",
+"stop": "pm2 stop servers.yml",
