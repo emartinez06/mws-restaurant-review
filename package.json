@@ -20,16 +20,15 @@
   "main": "app.js",
   "scripts": {
     "debug": "node debug app.js",
-    "start": "pm2 start servers.yml",
+    "restart": "pm2 restart servers.yml",
+    "start": "npm run gulpfile.js && pm2 start servers.yml",
+    "stop": "pm2 stop servers.yml",
     "optimize": "gulp"
   },
   "dependencies": {
     "rc": "1.0.1",
     "sails": "^0.12.13",
-    "sails-disk": "~0.10.9"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.26.3",
+    "sails-disk": "~0.10.9",
     "connect": "^3.6.6",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
@@ -46,5 +45,6 @@
     "pm2": "^3.2.2",
     "run-sequence": "^2.2.1",
     "serve-static": "^1.13.2"
-  }
+  },
+  "devDependencies": {}
 }

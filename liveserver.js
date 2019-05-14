@@ -13,9 +13,10 @@ let connect = require('connect');
 let serveStatic = require('serve-static');
 let app = connect();
 let directory = './app';
+let port = process.env.PORT || 3000;
 
 app.use(serveStatic(directory, {
     index: ['index.html']
     })
 );
-app.listen(3000);
+app.listen(port);
